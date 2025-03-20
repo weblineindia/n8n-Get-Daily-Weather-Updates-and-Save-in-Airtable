@@ -1,0 +1,214 @@
+{
+  "name": "Automated Daily Weather Data Fetcher and Storage",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 10
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        40,
+        100
+      ],
+      "id": "871fd9fd-de44-4c9f-aef4-0c731c5685f1",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appKtypfMptBIKStp",
+          "mode": "list",
+          "cachedResultName": "WeatherData",
+          "cachedResultUrl": "https://airtable.com/appKtypfMptBIKStp"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblfb3sJ84eQUlYJd",
+          "mode": "list",
+          "cachedResultName": "Data",
+          "cachedResultUrl": "https://airtable.com/appKtypfMptBIKStp/tblfb3sJ84eQUlYJd"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Location": "={{ $json.name }}",
+            "Timezone": "={{ $json.timezone }}",
+            "Temp": "={{ $json.main.temp }}",
+            "Wind Speed": "={{ $json.wind.speed }}",
+            "Humidity": "={{ $json.main.humidity }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Location",
+              "displayName": "Location",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Timezone",
+              "displayName": "Timezone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Temp",
+              "displayName": "Temp",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Wind Speed",
+              "displayName": "Wind Speed",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Humidity",
+              "displayName": "Humidity",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        480,
+        100
+      ],
+      "id": "0b721c2a-6301-4a08-9602-990598d0f7a3",
+      "name": "Store Weather Data",
+      "notesInFlow": true,
+      "notes": "Store weather data in table\n"
+    },
+    {
+      "parameters": {
+        "url": "https://api.openweathermap.org/data/2.5/weather?lat=23.0059&lon=72.5547&appid=48cfef64f07db71ba4ff118d253dda02",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "units",
+              "value": "metric"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        260,
+        100
+      ],
+      "id": "052a47c1-d167-432c-93f2-117a1c129c51",
+      "name": "Get Weather Data",
+      "notesInFlow": true,
+      "notes": "Fetching the weather data"
+    },
+    {
+      "parameters": {
+        "content": "Automated Daily Weather Data Fetcher and Storage\n\n",
+        "height": 320,
+        "width": 680,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "525f3e92-c620-47f2-b97e-53cb98d63406",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "This workflow fetches weather data daily using the OpenWeatherMap API and stores the weather information in Airtable. The data can include current temperature, humidity, wind speed, and other relevant weather details. This automation ensures that the weather data is updated every day and stored for future reference, providing an easy-to-access historical record of the weather patterns.",
+        "height": 120,
+        "width": 680,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        340
+      ],
+      "id": "cff8dbb0-3639-45a6-a06d-9ab63b2dfce8",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Weather Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Weather Data": {
+      "main": [
+        [
+          {
+            "node": "Store Weather Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "0a2d01a2-cbfe-4915-aac6-26cedf8f31a6",
+  "meta": {
+    "instanceId": "14e4c77104722ab186539dfea5182e419aecc83d85963fe13f6de862c875ebfa"
+  },
+  "id": "PHp3gKoyYfSztbTB",
+  "tags": []
+}
