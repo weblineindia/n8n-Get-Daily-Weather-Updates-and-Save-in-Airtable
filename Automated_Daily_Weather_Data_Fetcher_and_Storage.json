@@ -116,11 +116,19 @@
       "id": "0b721c2a-6301-4a08-9602-990598d0f7a3",
       "name": "Store Weather Data",
       "notesInFlow": true,
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ygauzo9XGVW33SFD",
+          "name": "Airtable pythontech 2"
+        }
+      },
       "notes": "Store weather data in table\n"
     },
     {
       "parameters": {
-        "url": "https://api.openweathermap.org/data/2.5/weather?lat=23.0059&lon=72.5547&appid=48cfef64f07db71ba4ff118d253dda02",
+        "url": "https://api.openweathermap.org/data/2.5/weather?lat=23.0059&lon=72.5547",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
         "sendQuery": true,
         "queryParameters": {
           "parameters": [
@@ -141,6 +149,20 @@
       "id": "052a47c1-d167-432c-93f2-117a1c129c51",
       "name": "Get Weather Data",
       "notesInFlow": true,
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "glJ33a6G5lqhm1CW",
+          "name": "Shopify GraphQL Cred"
+        },
+        "httpBasicAuth": {
+          "id": "zowZrB19NtOy4lxp",
+          "name": "OpenWeatherAPi"
+        },
+        "httpQueryAuth": {
+          "id": "OVXHUjaqzUxECHEG",
+          "name": "OpenWeatherMap Query Auth"
+        }
+      },
       "notes": "Fetching the weather data"
     },
     {
@@ -205,8 +227,9 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "0a2d01a2-cbfe-4915-aac6-26cedf8f31a6",
+  "versionId": "48a18d20-eecc-4642-9eb0-f2bce013c214",
   "meta": {
+    "templateCredsSetupCompleted": true,
     "instanceId": "14e4c77104722ab186539dfea5182e419aecc83d85963fe13f6de862c875ebfa"
   },
   "id": "PHp3gKoyYfSztbTB",
